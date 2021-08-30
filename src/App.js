@@ -26,7 +26,7 @@ function App({ posts, fetchPostsFn }) {
     emitEvent: fetch(),
   };
   return (
-    <div className="App">
+    <div className="App" data-test="appComponent">
       <Header />
       <section className="main">
         <Headline
