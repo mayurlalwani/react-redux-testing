@@ -1,13 +1,13 @@
 import React from "react";
-import { findByTestAttribute, checkProps } from "./../../Utils/";
-import SharedButton from "./index";
 import { shallow } from "enzyme";
+import { findByTestAttribute, checkProps } from "./../../Utils";
+import SharedButton from "./index";
 
 describe("SharedButton Component", () => {
   describe("Checking PropTypes", () => {
-    it("should not throw warning", () => {
+    it("Should NOT throw a warning", () => {
       const expectedProps = {
-        buttonText: "Example button text",
+        buttonText: "Example Button Text",
         emitEvent: () => {},
       };
       const propsError = checkProps(SharedButton, expectedProps);
@@ -17,16 +17,26 @@ describe("SharedButton Component", () => {
 
   describe("Renders", () => {
     let wrapper;
+    let mockFunc;
     beforeEach(() => {
+      mockFunc = jest.fn();
       const props = {
-        buttonText: "Example button text",
-        emitEvent: () => {},
+        buttonText: "Example Button Text",
+        emitEvent: mockFunc,
       };
       wrapper = shallow(<SharedButton {...props} />);
     });
-    it("Should render a button", () => {
+
+    it("Should Render a button", () => {
       const button = findByTestAttribute(wrapper, "buttonComponent");
       expect(button.length).toBe(1);
+    });
+
+    it("Should emit callback on click event", () => {
+      const button = findByTestAttribute(wrapper, "buttonComponent");
+      button.simulate("click");
+      const callback = mockFunc.mock.calls.length;
+      expect(callback).toBe(1);
     });
   });
 });
