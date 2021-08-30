@@ -42,6 +42,7 @@ function App({ posts, fetchPostsFn }) {
               const configListItem = {
                 title,
                 desc: body,
+                key: index,
               };
               return <ListItem {...configListItem} />;
             })}
