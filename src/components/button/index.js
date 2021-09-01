@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class SharedButton extends Component {
-  submitEvent() {
-    if (this.props.emitEvent) {
-      this.props.emitEvent();
+const SharedButton = (props) => {
+  const submitEvent = () => {
+    if (props.emitEvent) {
+      props.emitEvent();
     }
-  }
-  render() {
-    const { buttonText } = this.props;
-    return (
-      <button onClick={this.submitEvent()} data-test="buttonComponent">
-        {buttonText}
-      </button>
-    );
-  }
-}
+  };
+  const { buttonText } = props;
+  return (
+    <button onClick={submitEvent} data-test="buttonComponent">
+      {buttonText}
+    </button>
+  );
+};
 
 SharedButton.propTypes = {
   buttonText: PropTypes.string,

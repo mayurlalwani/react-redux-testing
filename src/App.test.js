@@ -1,5 +1,5 @@
 import App from "./App";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { findByTestAttribute, testStore } from "../src/Utils";
 
 const setUp = (initialState = {}) => {
@@ -34,5 +34,18 @@ describe("App Component", () => {
   it("Should render without errors", () => {
     const component = findByTestAttribute(wrapper, "appComponent");
     expect(component.length).toBe(1);
+  });
+
+  it("methodUpdate function should update the state as expected", () => {
+    const classInstance = wrapper.instance();
+    classInstance.methodUpdate();
+    const newState = classInstance.state.hideBtn;
+    expect(newState).toBe(true);
+  });
+
+  it("methodReturnsValue method should return value as expected", () => {
+    const classInstance = wrapper.instance();
+    const newValue = classInstance.methodReturnsValue(6);
+    expect(newValue).toBe(7);
   });
 });
